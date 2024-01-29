@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lescomarques_flutter/screens/comarcas_screen.dart';
 import 'package:lescomarques_flutter/screens/provincias_screen.dart';
 
 void main() {
@@ -12,6 +13,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: LoginPage(),
+      routes: {
+        '/provincias': (context) => provinciasPage(),
+        '/comarcas': (context) => comarcasPage(),
+      },
     );
   }
 }
@@ -43,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue)),
+              const SizedBox(height: 30.0),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -64,8 +70,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 child: const Text('Iniciar sesión'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => provinciasPage()));
-                  print('Correo electrónico: ${_emailController.text}');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const provinciasPage()));                  print('Correo electrónico: ${_emailController.text}');
                   print('Contraseña: ${_passwordController.text}');
                 },
               ),

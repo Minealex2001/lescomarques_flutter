@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterwidgets/main.dart';
-import 'package:flutterwidgets/pantallas/Comarcas_pantalla.dart';
-import 'dart:convert'; // Para  realizar conversiones entre tipos
-import 'package:http/http.dart' as http; // Para reañozar ètocopmes HTTP
+
+import '../data/api.dart';
+
 void main() {
   runApp(const provincias());
 }
@@ -33,20 +31,51 @@ class _provinciasPageState extends State<provinciasPage> {
       appBar: AppBar(
         title: const Text('Provincias'),
       ),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/iesAlvaroFalomir.jpeg'),
-              radius: 100,
+      body: ListView.builder(
+        itemCount: provincies['provincies'].length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(provincies['provincies'][index]['img']),
+                  radius: 125,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/comarques', arguments: {
+                      'provincia': provincies['provincies'][index]['provincia'],
+                      'id': provincies['provincies'][index]['id'],
+                    });
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 250,
+                  ),
+                ),
+                Text(
+                  provincies['provincies'][index]['provincia'],
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 3.0,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
-    ),
     );
   }
 }
