@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/api.dart';
+import 'comarcas_screen.dart';
 
 void main() {
   runApp(const provincias());
@@ -36,42 +37,54 @@ class _provinciasPageState extends State<provinciasPage> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  backgroundImage:
-                      NetworkImage(provincies['provincies'][index]['img']),
-                  radius: 125,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/comarques', arguments: {
-                      'provincia': provincies['provincies'][index]['provincia'],
-                      'id': provincies['provincies'][index]['id'],
-                    });
-                  },
-                  child: Container(
-                    width: 250,
-                    height: 250,
-                  ),
-                ),
-                Text(
-                  provincies['provincies'][index]['provincia'],
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 3.0,
-                        color: Colors.black,
+            child: GestureDetector(
+              onTap: () {
+                print("CLick");
+              },
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            provincies['provincies'][index]['imatge']),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomRight,
+                        colors: [
+                          Colors.black.withOpacity(.4),
+                          Colors.black.withOpacity(.2),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 150,
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          provincies['provincies'][index]['nom'],
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

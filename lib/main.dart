@@ -60,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20.0),
               TextFormField(
                 controller: _passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                   filled: true,
                   labelText: 'Contraseña',
@@ -70,8 +71,71 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 child: const Text('Iniciar sesión'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const provinciasPage()));                  print('Correo electrónico: ${_emailController.text}');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const provinciasPage()));
+                  print('Correo electrónico: ${_emailController.text}');
                   print('Contraseña: ${_passwordController.text}');
+                },
+              ),
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                child: const Text('Registrarse'),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        child: Container(
+                          width: 600, // Establece el ancho que desees
+                          height: 400, // Establece la altura que desees
+                          child: AlertDialog(
+                            title: const Text('Registro'),
+                            content: Column(
+                              children: <Widget>[
+                                TextFormField(
+                                  controller: _emailController,
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    labelText: 'Correo electrónico',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                const SizedBox(height: 20.0),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    labelText: 'Contraseña',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: <Widget>[
+                              SizedBox(
+                                width: 100,),
+                              TextButton(
+                                child: const Text('Cancelar'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  print("Cancelado");
+                                },
+                              ),
+                              TextButton(
+                                child: const Text('Registrarse'),
+                                onPressed: () {
+                                  // Aquí puedes poner la lógica de registro
+                                  Navigator.of(context).pop();
+                                  print('Correo electrónico: ${_emailController.text}');
+                                  print('Contraseña: ${_passwordController.text}');
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             ],
