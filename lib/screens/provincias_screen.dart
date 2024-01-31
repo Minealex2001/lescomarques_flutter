@@ -38,57 +38,37 @@ class _provinciasPageState extends State<provinciasPage> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {
-                print("CLick");
-              },
+              onTap: () {},
               child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            provincies['provincies'][index]['imatge']),
+                alignment: Alignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage:
+                    NetworkImage(provincies['provincies'][index]['img']),
+                    radius: 125,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/comarques', arguments: {
+                        'provincia': provincies['provincies'][index]['provincia'],
+                        'id': provincies['provincies'][index]['id'],
+                      });
+                    },
+                    child: Text(
+                      provincies['provincies'][index]['provincia'],
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomRight,
-                        colors: [
-                          Colors.black.withOpacity(.4),
-                          Colors.black.withOpacity(.2),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 150,
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          provincies['provincies'][index]['nom'],
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
+                  ), // Added closing parenthesis
                 ],
-              ),
-            ),
-          );
-        },
-      ),
+              ), // Added closing parenthesis
+            ), // Added closing parenthesis
+          ); // Added semicolon
+        }, // Added closing parenthesis
+      ), // Added closing parenthesis
     );
   }
 }
