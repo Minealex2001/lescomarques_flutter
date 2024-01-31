@@ -40,7 +40,9 @@ class _comarcasPageState extends State<comarcasPage> {
               leading: Image.network(comarcas[index]['img']),
               title: Text(comarcas[index]['comarca']),
               onTap: () {
-                Navigator.pushNamed(context, '/detalleComarca', arguments: comarcas[index]);
+                Navigator.pushNamed(context, '/detalleComarca', arguments: {
+                  'comarques': comarcas[index],
+                });
               },
             ),
           );
