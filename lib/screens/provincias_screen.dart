@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../data/api.dart';
-import 'comarcas_screen.dart';
 
 void main() {
   runApp(const provincias());
@@ -37,24 +36,25 @@ class _provinciasPageState extends State<provinciasPage> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  CircleAvatar(
-                    backgroundImage:
-                    NetworkImage(provincies['provincies'][index]['img']),
-                    radius: 125,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/comarques', arguments: {
-                        'provincia': provincies['provincies'][index]['provincia'],
-                        'id': provincies['provincies'][index]['id'],
-                      });
-                    },
-                    child: Text(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/comarques', arguments: {
+                      'provincia': provincies['provincies'][index]['provincia'],
+                      'comarcas': provincies['provincies'][index]['comarques'],
+                    });
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children : [
+                      CircleAvatar(
+                      backgroundImage:
+                      NetworkImage(provincies['provincies'][index]['img']),
+                      radius: 125,
+                    ),
+                    Text(
                       provincies['provincies'][index]['provincia'],
                       style: const TextStyle(
                         fontSize: 30,
@@ -62,13 +62,14 @@ class _provinciasPageState extends State<provinciasPage> {
                         color: Colors.white,
                       ),
                     ),
-                  ), // Added closing parenthesis
-                ],
-              ), // Added closing parenthesis
-            ), // Added closing parenthesis
-          ); // Added semicolon
-        }, // Added closing parenthesis
-      ), // Added closing parenthesis
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

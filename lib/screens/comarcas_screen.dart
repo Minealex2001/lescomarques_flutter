@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../data/api.dart';
+import 'package:lescomarques_flutter/data/api.dart';
 
 void main() {
   runApp(const comarcas());
@@ -27,12 +26,25 @@ class comarcasPage extends StatefulWidget {
 class _comarcasPageState extends State<comarcasPage> {
   @override
   Widget build(BuildContext context) {
+    final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    var comarcas = arguments['comarcas']; // Accede a la lista de comarcas pasada
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Comarcas'),
+        title: Text(arguments['provincia']), // Muestra el nombre de la provincia
       ),
-      body: const Center(
-        child: Text('Aquí se mostrarán las comarcas'),
+      body: ListView.builder(
+        itemCount: comarcas.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              leading: Image.network(comarcas[index]['img']),
+              title: Text(comarcas[index]['comarca']),
+              onTap: () {
+                Navigator.pushNamed(context, '/detalleComarca', arguments: comarcas[index]);
+              },
+            ),
+          );
+        },
       ),
     );
   }

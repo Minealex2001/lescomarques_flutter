@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lescomarques_flutter/screens/comarcaDetails_screen.dart';
 import 'package:lescomarques_flutter/screens/comarcas_screen.dart';
 import 'package:lescomarques_flutter/screens/provincias_screen.dart';
 
@@ -15,7 +16,8 @@ class MainApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/provincias': (context) => provinciasPage(),
-        '/comarcas': (context) => comarcasPage(),
+        '/comarques': (context) => comarcasPage(),
+        '/detalleComarca': (context) => comarcaPage(),
       },
     );
   }
@@ -71,7 +73,10 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 child: const Text('Iniciar sesión'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const provinciasPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const provinciasPage()));
                   print('Correo electrónico: ${_emailController.text}');
                   print('Contraseña: ${_passwordController.text}');
                 },
@@ -113,7 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             actions: <Widget>[
                               SizedBox(
-                                width: 100,),
+                                width: 100,
+                              ),
                               TextButton(
                                 child: const Text('Cancelar'),
                                 onPressed: () {
@@ -126,8 +132,10 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   // Aquí puedes poner la lógica de registro
                                   Navigator.of(context).pop();
-                                  print('Correo electrónico: ${_emailController.text}');
-                                  print('Contraseña: ${_passwordController.text}');
+                                  print(
+                                      'Correo electrónico: ${_emailController.text}');
+                                  print(
+                                      'Contraseña: ${_passwordController.text}');
                                 },
                               ),
                             ],
